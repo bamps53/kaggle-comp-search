@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:3000/api'; // Update this with the actual backend URL
+const API_BASE_URL = 'http://localhost:3000'; // Update this with the actual backend URL
 
 export interface SearchResult {
   id: number;
@@ -24,7 +24,7 @@ export interface CompetitionDetails {
 
 export const searchCompetitions = async (query: string): Promise<SearchResult[]> => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/search`, { params: { query } });
+    const response = await axios.get(`${API_BASE_URL}/competitions/search`, { params: { query } });
     return response.data;
   } catch (error) {
     console.error('Error searching competitions:', error);
@@ -34,7 +34,7 @@ export const searchCompetitions = async (query: string): Promise<SearchResult[]>
 
 export const getCompetitionDetails = async (id: number): Promise<CompetitionDetails> => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/competition/${id}`);
+    const response = await axios.get(`${API_BASE_URL}/competitions/${id}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching competition details:', error);

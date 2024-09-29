@@ -1,6 +1,10 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import competitionRoutes from './routes/competitionRoutes';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -13,7 +17,7 @@ app.get('/', (req, res) => {
 });
 
 // Use competition routes
-app.use('/api/competitions', competitionRoutes);
+app.use('/competitions', competitionRoutes);
 
 // 404 handler
 app.use((req, res, next) => {
