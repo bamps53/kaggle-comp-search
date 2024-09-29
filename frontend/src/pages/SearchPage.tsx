@@ -67,7 +67,7 @@ const SearchPage: React.FC = () => {
           <SimpleGrid columns={gridColumns} spacing={6}>
             {sortedResults.map((result) => (
               <Box key={result.id} p={4} borderWidth={1} borderRadius="md" boxShadow="md">
-                <Link to={`/competition/${result.id}`}>
+                <Link to={`/competition/${result.slug}`}>
                   <Text fontWeight="bold" fontSize="lg" mb={2}>{result.title}</Text>
                   <Text fontSize="sm">Date: {new Date(result.date).toLocaleDateString()}</Text>
                   <Text fontSize="sm">Participants: {result.participants}</Text>

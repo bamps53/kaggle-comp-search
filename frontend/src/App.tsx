@@ -16,7 +16,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/search" element={<SearchPage />} />
-              <Route path="/competition/:id" element={<CompetitionDetailsPage />} />
+              <Route path="/competition/:slug" element={<CompetitionDetailsPage />} />
             </Routes>
           </Container>
           <Footer />
