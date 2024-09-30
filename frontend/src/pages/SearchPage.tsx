@@ -2,14 +2,14 @@ import React, { useEffect, useState, useDeferredValue } from 'react';
 import { Box, VStack, Input, Text, SimpleGrid, Select, Container, Heading, useBreakpointValue, Link } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import useSearchStore from '../store/searchStore';
-import { searchCompetitions, CompetitionDetails } from '../services/api';
+import { searchCompetitions, Competition } from '../services/api';
 
 const SearchPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const deferredSearchTerm = useDeferredValue(searchTerm);
   const [error, setError] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<'relevance' | 'date' | 'name'>('relevance');
-  const { searchResults, setSearchResults } = useSearchStore();
+  const { competitions, setCompetitions } = useSearchStore();
 
   const gridColumns = useBreakpointValue({ base: 1, md: 2, lg: 3 });
 
@@ -17,21 +17,21 @@ const SearchPage: React.FC = () => {
     const initializeSearchResults = async () => {
       try {
         const results = await searchCompetitions("");
-        setSearchResults(results);
+        setCompetitions(results);
       } catch (error) {
         console.error("Error initializing search results:", error);
       }
     };
 
     initializeSearchResults();
-  }, [setSearchResults]);
+  }, [setCompetitions]);
 
   useEffect(() => {
     const handleSearch = async () => {
       setError(null);
       try {
-        const results = await searchCompetitions(deferredSearchTerm);
-        setSearchResults(results);
+        const competitions = await searchCompetitions(deferredSearchTerm);
+        setCompetitions(competitions);
       } catch (err) {
         setError('An error occurred while searching. Please try again.');
         console.error(err);
@@ -39,21 +39,20 @@ const SearchPage: React.FC = () => {
     };
 
     handleSearch();
-  }, [deferredSearchTerm, setSearchResults]);
+  }, [deferredSearchTerm, setCompetitions]);
 
-  const sortResults = (results: CompetitionDetails[]) => {
+  const sortCompetitions = (competitions: Competition[]) => {
     switch (sortBy) {
       case 'date':
-        return [...results].sort((a, b) => new Date(b.deadlineDate).getTime() - new Date(a.deadlineDate).getTime());
+        return [...competitions].sort((a, b) => new Date(b.deadlineDate).getTime() - new Date(a.deadlineDate).getTime());
       case 'name':
-        return [...results].sort((a, b) => a.slug.localeCompare(b.slug));
+        return [...competitions].sort((a, b) => a.slug.localeCompare(b.slug));
       default:
-        return results; // 'relevance' is the default order from the API
+        return competitions; // 'relevance' is the default order from the API
     }
   };
 
-
-  const sortedResults = sortResults(searchResults);
+  const sortedCompetitions = sortCompetitions(competitions);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -80,9 +79,9 @@ const SearchPage: React.FC = () => {
             <option value="participants">Sort by Participants</option>
           </Select>
           {error && <Text color="red.500">{error}</Text>}
-          {sortedResults.length > 0 && (
+          {sortedCompetitions.length > 0 && (
             <SimpleGrid columns={gridColumns} spacing={6} w="100%">
-              {sortedResults.map((result) => (
+              {sortedCompetitions.map((result) => (
                 <Box key={result.id} p={4} borderWidth={1} borderRadius="md" boxShadow="md">
                   <Link as={RouterLink} to={`/competition/${result.slug}`}>
                     <Text fontWeight="bold" fontSize="lg" mb={2}>{result.title}</Text>

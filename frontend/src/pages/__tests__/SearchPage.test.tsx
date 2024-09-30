@@ -12,8 +12,8 @@
 // jest.mock('../../store/searchStore', () => ({
 //   __esModule: true,
 //   default: () => ({
-//     searchResults: [],
-//     setSearchResults: jest.fn(),
+//     competitions: [],
+//     setCompetitions: jest.fn(),
 //   }),
 // }));
 

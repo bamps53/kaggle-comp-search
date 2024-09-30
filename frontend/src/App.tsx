@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SearchPage from './pages/SearchPage';
-import CompetitionDetailsPage from './pages/CompetitionDetailsPage';
+import CompetitionsPage from './pages/CompetitionsPage';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Navigate to="/search" />} />
             <Route path="/search" element={<SearchPage />} />
-            <Route path="/competition/:slug" element={<CompetitionDetailsPage />} />
+            <Route path="/competition/:slug" element={<CompetitionsPage />} />
           </Routes>
         </Container>
         <Footer />

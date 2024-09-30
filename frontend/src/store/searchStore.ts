@@ -1,20 +1,14 @@
 import { create } from "zustand";
-import { CompetitionDetails, CompetitionDetails } from "../services/api";
+import { Competition } from "../services/api";
 
 interface SearchStore {
-  searchResults: CompetitionDetails[];
-  setSearchResults: (results: CompetitionDetails[]) => void;
-  competitionDetails: CompetitionDetails | null;
-  setCompetitionDetails: (details: CompetitionDetails | null) => void;
+  competitions: Competition[];
+  setCompetitions: (results: Competition[]) => void;
 }
 
 const useSearchStore = create<SearchStore>((set) => ({
-  searchResults: [],
-  setSearchResults: (results: CompetitionDetails[]) =>
-    set({ searchResults: results }),
-  competitionDetails: null,
-  setCompetitionDetails: (details: CompetitionDetails | null) =>
-    set({ competitionDetails: details }),
+  competitions: [],
+  setCompetitions: (results: Competition[]) => set({ competitions: results }),
 }));
 
 export default useSearchStore;

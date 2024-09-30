@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_BASE_URL = "http://localhost:3000/api"; // Update this with the actual backend URL
 
-export interface CompetitionDetails {
+export interface Competition {
   id: string;
   slug: string;
   title: string;
@@ -14,7 +14,7 @@ export interface CompetitionDetails {
 
 export const searchCompetitions = async (
   query: string
-): Promise<CompetitionDetails[]> => {
+): Promise<Competition[]> => {
   console.log(query);
   try {
     const response = await axios.get(`${API_BASE_URL}/competitions/search`, {
@@ -27,9 +27,7 @@ export const searchCompetitions = async (
   }
 };
 
-export const getCompetitionDetails = async (
-  slug: string
-): Promise<CompetitionDetails> => {
+export const getCompetition = async (slug: string): Promise<Competition> => {
   console.log("slug: " + slug);
   try {
     const response = await axios.get(`${API_BASE_URL}/competitions/${slug}`);
