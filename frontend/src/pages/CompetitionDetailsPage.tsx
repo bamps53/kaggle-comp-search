@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link as RouterLink } from 'react-router-dom';
 import { Box, VStack, Heading, Text, Divider, Container, SimpleGrid, Link, Badge, Button, List, ListItem } from '@chakra-ui/react';
 import useSearchStore from '../store/searchStore';
-import { getCompetitionDetails, searchCompetitions, SearchResult, CompetitionDetails } from '../services/api';
+import { getCompetitionDetails, searchCompetitions, CompetitionDetails } from '../services/api';
 
 const CompetitionDetailsPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const { competitionDetails, setCompetitionDetails } = useSearchStore();
-  const [similarCompetitions, setSimilarCompetitions] = useState<SearchResult[]>([]);
+  const [similarCompetitions, setSimilarCompetitions] = useState<CompetitionDetails[]>([]);
   const [isLoadingSimilar, setIsLoadingSimilar] = useState(false);
 
   useEffect(() => {

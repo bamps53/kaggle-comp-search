@@ -12,7 +12,7 @@ const Header: React.FC = () => {
           <Link to="/">Kaggle Comp Search</Link>
         </Heading>
         <Button as={Link} to="/search" colorScheme="whiteAlpha" size={buttonSize}>
-          Search
+          Home
         </Button>
       </Flex>
     </Box>
